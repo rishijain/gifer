@@ -10,9 +10,14 @@ class GifsController < ApplicationController
 
   def create
     gif = current_user.gifs.new(gif_params)
-    gif.save
+    if gif.save
+      flash[:notice] = 'Uploaded successfully !'
+      redirect_to root_path
+    else
+      flash[:alert] = gif.errors.messages[:file].join(', ')
+      redirect_to gifs_new_path
+    end
 
-    redirect_to root_path
   end
 
   private
