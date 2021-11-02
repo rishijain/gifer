@@ -1,4 +1,6 @@
 class Gif < ApplicationRecord
+  self.per_page = 3
+
   belongs_to :user
   has_one_attached :file
 
