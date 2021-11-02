@@ -9,5 +9,17 @@ class GifsController < ApplicationController
   end
 
   def create
+    gif = current_user.gifs.new(gif_params)
+    gif.save
+
+    redirect_to root_path
   end
+
+  private
+
+
+  def gif_params
+    params.require(:gif).permit(:name, :description, :file)
+  end
+
 end
